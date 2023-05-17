@@ -3,16 +3,37 @@
 ## Task 1
 
 ### Create an IAM role with S3 full access.
-- Search IAM in AWS Console.
-- Under the Access Management section click on the Roles section.
-- Click on Create Role and select AWS Service and EC2.
-- Search AmazonS3FullAccess under the policies section and select it.
-- Add your role name and click on create role.
+- Open your terminal and type aws configure.
+- Type your access key ID and password and type your region name.
+- Create a file policy.json and add the AssumeRolePolicyDocument.
+  
+  ```{
+		"Version": "2012-10-17",
+		"Statement": {
+			"Effect": "Allow",
+				"Principal": {
+					"Service": “s3.amazonaws.com”
+					“AWS” : “arn:aws:iam::0039*****9674:user/pajji”
+					},
+			"Action": "sts:AssumeRole"
+			}
+		}
+- Create an IAM role 
+  
+  ```aws iam create-role --role-name put-object-role --assume-role-policy-document file://path/to/file/policy.json```
+- Add permission to the role 
+  
+  ```aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --role-name put-object-role```
 
 ### Create an EC2 instance with the above role.
-- Search EC2 in AWS Console and click on Launch Instance.
-- Give the name of your instance and select the below configuration.
-- Under advance details select the IAM role created and launch the instance.
+- Open your terminal and type aws configure.
+- Type your access key ID and password and type your region name.
+- Use the role created above by typing
+  
+  ```aws sts assume-role --role-arn arn:aws:iam::0039*****9674:role/put-object-role --role-session-name my-session --duration-seconds 3600```
+- Create an EC2 instance
+  
+  ```aws ec2 run-instances --image-id ami-0889a44b331db0194 --instance-type t2.micro --key-name secret-key --subnet-id subnet-0953ec6e2de22279d --security-group-ids sg-046ffd1222db8a6f3 --region us-east-1``` 
 
 ### Create a bucket from AWS CLI
 - Open your terminal and type aws configure.
