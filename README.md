@@ -7,17 +7,17 @@
 - Type your access key ID and password and type your region name.
 - Create a file policy.json and add the AssumeRolePolicyDocument.
   
-  ```{
-		"Version": "2012-10-17",
-		"Statement": {
-			"Effect": "Allow",
-				"Principal": {
-					"Service": “s3.amazonaws.com”
-					“AWS” : “arn:aws:iam::0039*****9674:user/pajji”
-					},
-			"Action": "sts:AssumeRole"
-			}
+  ```
+  {
+	"Version": "2012-10-17",
+	"Statement": {
+		"Effect": "Allow",
+			"Principal": {
+				"Service": “s3.amazonaws.com”
+			},
+		"Action": "sts:AssumeRole"
 		}
+  }
 - Create an IAM role 
   
   ```aws iam create-role --role-name put-object-role --assume-role-policy-document file://path/to/file/policy.json```
