@@ -16,7 +16,7 @@
 				"Service": “s3.amazonaws.com”
 			},
 		"Action": "sts:AssumeRole"
-		}
+	}
   }
 - Create an IAM role 
   
