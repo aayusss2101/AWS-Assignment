@@ -51,6 +51,27 @@
 - Search CloudWatchLogsFullAccess under the policies section and select it.
 - Add your role name and click on create role.
 
+### Create an Inline Policy for Lambda Function
+- Add inline policy with the following definition:
+
+  ```
+  {
+	"Version": "2012-10-17",
+	"Statement": [
+	{
+	  "Effect": "Allow",
+	  "Action": [
+		"lambda:InvokeAsync",
+		"lambda:InvokeFunction",
+		"lambda:UpdateFunctionCode",
+		"lambda:UpdateFunctionConfiguration"
+	  ],
+	  "Resource": "arn:aws:lambda:us-east-1:003905319674:function:jsonToS3"
+	}
+    ]
+  }
+  ```
+
 ### Lambda Function
 - Open the AWS Lambda console and create a new Lambda function.
 - Set the runtime to Python 3.x and choose a role with write access to S3.
